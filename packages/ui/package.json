@@ -6,6 +6,12 @@
     "./*": "./src/*.tsx"
   },
   "scripts": {
+    "format:biome": "biome format --write .",
+		"format:prettier": "prettier --write . --ignore-path ../../.prettierignore",
+		"format": "bun run format:biome && bun run format:prettier",
+		"lint": "biome lint .",
+		"lint:fix": "biome lint --write .",
+		"check": "biome check --write . && bun run format:prettier",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit"
   },
