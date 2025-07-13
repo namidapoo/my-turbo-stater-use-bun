@@ -1,7 +1,7 @@
 {
-  "name": "my-turbo-stater-use-bun",
-  "private": true,
-  "scripts": {
+	"name": "my-turbo-stater-use-bun",
+	"private": true,
+	"scripts": {
 		"prepare": "lefthook install",
 		"preinstall": "npx only-allow bun",
 		"build": "turbo run build",
@@ -10,21 +10,21 @@
 		"format": "turbo run format",
 		"lint": "turbo run lint",
 		"check": "turbo run check --continue",
-    "check-types": "turbo run check-types"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.1.1",
-    "lefthook": "^1.12.2",
-    "prettier": "^3.6.2",
-    "turbo": "^2.5.4",
-    "typescript": "5.8.3"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "bun@1.2.18",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+		"check-types": "turbo run check-types"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.1.1",
+		"lefthook": "^1.12.2",
+		"prettier": "^3.6.2",
+		"turbo": "^2.5.4",
+		"typescript": "5.8.3"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"packageManager": "bun@1.2.18",
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	]
 }
