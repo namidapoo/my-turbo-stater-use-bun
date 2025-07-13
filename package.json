@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "my-turbo-stater-use-bun",
   "private": true,
   "scripts": {
     "build": "turbo run build",
