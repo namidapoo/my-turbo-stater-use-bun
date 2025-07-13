@@ -1,133 +1,181 @@
-# Turborepo starter
+# My Turbo Starter with Bun
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern monorepo starter template powered by Turborepo and Bun, featuring Next.js applications with shared components and configurations.
 
-## Using this example
+## Language
 
-Run the following command:
+- [Japanese README](./README.ja.md)
 
-```sh
-npx create-turbo@latest
+## Features
+
+- **Monorepo Architecture**: Powered by Turborepo for efficient task orchestration
+- **Bun Package Manager**: Fast, modern JavaScript runtime and package manager
+- **Next.js 15**: Latest version with App Router and Turbopack
+- **Shared Components**: Reusable UI component library
+- **TypeScript**: Full type safety across all packages
+- **Code Quality**: Biome for fast linting and formatting, Prettier for other files
+- **Git Hooks**: Automated code quality checks with Lefthook
+- **CI/CD**: GitHub Actions workflows for quality checks and reviews
+
+## What's Inside?
+
+This monorepo includes the following packages and apps:
+
+### Apps
+
+- `web`: Main web application (Next.js) - http://localhost:3000
+- `docs`: Documentation site (Next.js) - http://localhost:3001
+
+### Packages
+
+- `@repo/ui`: Shared React component library
+- `@repo/typescript-config`: Shared TypeScript configurations
+
+## Prerequisites
+
+- [Bun](https://bun.sh/) >= 1.2.18
+- Node.js >= 18
+
+## Getting Started
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd my-turbo-stater-use-bun
 ```
 
-## What's inside?
+2. Install dependencies:
 
-This Turborepo includes the following packages/apps:
+```bash
+bun install
+```
 
-### Apps and Packages
+3. Start development:
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+```bash
+bun dev
+```
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Common Commands
 
-### Utilities
+Run these commands from the root directory:
 
-This Turborepo has some additional tools already setup for you:
+### Development
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [Prettier](https://prettier.io) for code formatting
+```bash
+# Start all apps in development mode
+bun dev
+
+# Start a specific app
+bun dev --filter=web
+bun dev --filter=docs
+```
 
 ### Build
 
-To build all apps and packages, run the following command:
+```bash
+# Build all apps and packages
+bun run build
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+# Build a specific app
+bun run build --filter=web
+bun run build --filter=docs
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Code Quality
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+```bash
+# Run type checking
+bun check-types
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+# Format all code
+bun format
 
-### Develop
+# Run linting
+bun lint
 
-To develop all apps and packages, run the following command:
+# Run complete check (format + lint)
+bun check
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+# Format from root directory (affects all files)
+bun format:root
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## Project Structure
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+my-turbo-stater-use-bun/
+├── apps/
+│   ├── web/         # Main web application
+│   └── docs/        # Documentation site
+├── packages/
+│   ├── ui/          # Shared component library
+│   └── typescript-config/  # Shared TypeScript configurations
+├── biome.jsonc      # Biome configuration
+├── lefthook.yml     # Git hooks configuration
+├── turbo.json       # Turborepo configuration
+└── package.json     # Root package configuration
 ```
 
-### Remote Caching
+## Configuration
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Biome
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+This project uses Biome for JavaScript/TypeScript linting and formatting. Configuration is in `biome.jsonc`.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+### Prettier
+
+Prettier is used for formatting non-JS/TS files (JSON, YAML, Markdown, etc.).
+
+### TypeScript
+
+Each package has its own `tsconfig.json` extending from shared configurations in `@repo/typescript-config`.
+
+### Git Hooks
+
+Pre-commit hooks are configured with Lefthook to ensure code quality:
+
+- Biome formatting and linting for JS/TS files
+- Prettier formatting for other files
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Ensure all checks pass: `bun check`
+4. Commit with conventional commit messages
+5. Create a pull request
+
+### Commit Message Format
 
 ```
-cd my-turborepo
+type: subject
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+body (optional)
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+Types:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, etc)
+- `refactor`: Code refactoring
+- `test`: Test changes
+- `chore`: Maintenance tasks
+- `ci`: CI/CD changes
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
+## License
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
+This project is open source and available under the [MIT License](LICENSE).
 
-## Useful Links
+## Acknowledgments
 
-Learn more about the power of Turborepo:
+Built with:
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+- [Turborepo](https://turbo.build/repo)
+- [Bun](https://bun.sh/)
+- [Next.js](https://nextjs.org/)
+- [Biome](https://biomejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
